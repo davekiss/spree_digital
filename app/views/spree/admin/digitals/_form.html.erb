@@ -2,13 +2,13 @@
   <%= form_for(:digital, :url => admin_product_digitals_path(@product), :method => :create, :multipart => true ) do |f| %>
     <fieldset>
       <legend><%= Spree::Variant.model_name.human %> "<%= variant.is_master ? "Master" : variant.options_text %>"</legend>
-      <strong><%= Spree.t(:files) %>:</strong>
+      <strong><%= Spree.t(:files, scope: 'digitals') %>:</strong>
       <% if variant.digital? %>
         <ul>
           <% variant.digitals.each do |digital| %>
             <li>
               <%= render digital %>&nbsp;&nbsp;
-              <%= link_to Spree.t(:delete_file), admin_product_digital_url(@product, digital), :data => {:confirm => Spree.t(:delete_file_cofirmation), :filename => digital.attachment_file_name}, :method => :delete %>
+              <%= link_to Spree.t(:delete_file, scope: 'digitals'), admin_product_digital_url(@product, digital), :data => {:confirm => Spree.t(:delete_file_confirmation, scope: 'digitals'), :filename => digital.attachment_file_name}, :method => :delete %>
             </li>
           <% end %>
         </ul>
@@ -17,7 +17,7 @@
       <% end %>
       <p class="form-buttons">
         <%= f.field_container :file do %>
-          <%= f.label :file, Spree.t(:new_file) %> <span class="required">*</span><br/>
+          <%= f.label :file, Spree.t(:new_file, scope: 'digitals') %> <span class="required">*</span><br/>
           <%= f.file_field :attachment %>
         <% end %>
 
